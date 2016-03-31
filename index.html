@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<title>Demo Labelling</title>
+<head>
+	<link rel="stylesheet" type="text/css" href="demo.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-sanitize.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+	<script src="controller.js"></script>
+</head>
+<body ng-app="demoModule">
+	<div class="container" ng-controller="myController">
+
+		<div id="question" class="questionContainer" ng-bind-html="currQuestionText">
+
+		</div>
+		<div id="dropHolder">
+			<div class="droppable myMap" id="drop_{{x.id}}_{{$index+1}}" ng-repeat="x in dropables" style="position:absolute;left:{{x.left}};top:{{x.top}};width:{{x.width}};height:{{x.height}};">
+				<div id="cross_{{$index+1}}" class="crossBtn" ng-click="revertDrop($index+1)" ng-show="crossBtnModel[$index+1]">
+					X
+				</div>
+			</div>
+		</div>
+		<div class="answerContainer">
+			<div class="answerHolder" ng-repeat="x in questioncomponents">
+				<div id="drag_{{x.component_id}}_{{$index+1}}" class="rectangle option" style="background-color: {{colorArr[$index]}};" droppedOn="0" ng-disabled="droppedOn !==0"></div><div class="answerText" ng-bind-html="x.component_text"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
